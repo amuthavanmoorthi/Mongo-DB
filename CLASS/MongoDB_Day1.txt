@@ -1,0 +1,466 @@
+Day 1
+---------
+
+test> show dbs
+ChennaiB2      72.00 KiB
+EComm         144.00 KiB
+Employee       72.00 KiB
+Kgm_B15        72.00 KiB
+MCAIIM         72.00 KiB
+PVT_Employee  128.00 KiB
+Showroom       72.00 KiB
+Student        72.00 KiB
+admin          40.00 KiB
+config         72.00 KiB
+kgm           144.00 KiB
+kgmchnb2      224.00 KiB
+local          80.00 KiB
+
+
+test> use batch17
+switched to db batch17
+
+
+batch17> db.createCollection("Student_det")
+
+batch17> db.createCollection("Department");
+{ ok: 1 }
+
+batch17> show collections
+Department
+Student_det
+
+batch17> db.department.drop()
+false
+
+batch17> show collections
+Department
+Student_det
+
+batch17> db.Department.drop()
+true
+
+batch17> show collections
+Student_det
+
+batch17> db.dropDatabase()
+{ ok: 1, dropped: 'batch17' }
+
+
+
+batch17> show dbs()
+ChennaiB2      72.00 KiB
+EComm         144.00 KiB
+Employee       72.00 KiB
+Kgm_B15        72.00 KiB
+MCAIIM         72.00 KiB
+PVT_Employee  128.00 KiB
+Showroom       72.00 KiB
+Student        72.00 KiB
+admin          40.00 KiB
+config        108.00 KiB
+kgm           144.00 KiB
+kgmchnb2      224.00 KiB
+local          80.00 KiB
+
+Inserting a Document
+------------------------------
+batch17> db.Student_det.insertOne( 
+{ 
+	"Rollno":1001, 
+	"Name":"Ragul",
+	"m1":50,
+	"m2":60,
+	"m3":55,
+	"DoJ":new Date("2023-06-12"),
+	"Subjects":["HTML","CSS","JS","MongoDB"], 
+	"Personal":{"age":21,"Email":"raghul21@gmail.com"}
+	
+}
+)
+
+{
+  acknowledged: true,
+  insertedId: ObjectId("64ae8200cc2f4e125d90a351")
+}
+
+
+batch17> db.Student_det.insertMany( [ 
+{ 
+"Rollno":1002, 
+"Name":"Ashok", 
+"m1":70,
+"m2":80,
+"m3":59,
+"DoJ":new Date("2023-06-13"), 
+"Subjects":["HTML","CSS","JS","MongoDB"], 
+"Personal":{"age":21,"Email":"ashkokk11@gmail.com"}
+}, 
+{
+"Rollno":1003, 
+"Name":"Kumar",
+"m1":10,
+"m2":9,
+"m3":23,
+"DoJ":new Date("2023-06-13"),
+"Subjects":["HTML","CSS","JS","MongoDB"],
+"Personal":{"age":22,"Email":"kumarr@gmail.com"}
+}
+])
+
+
+batch17> db.Student_det.insertMany( [ { "Rollno":1004, "Name":"Afrith", "m1":90,"m2":91,"m3":99,"DoJ":new Date("2023-05-20"), "Subjects":["HTML","CSS","JS","MongoDB"], "Personal":{"age":21,"Email":"afrith233@gmail.com"}}, {"Rollno":1005, "Name":"Udhaya","m1":20,"m2":29,"m3":33,"DoJ":new Date("2023-05-15"),"Subjects":["HTML","CSS","JS","MongoDB"],"Personal":{"age":23,"Email":"udhaya@gmail.com"}}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64ae880ecc2f4e125d90a354"),
+    '1': ObjectId("64ae880ecc2f4e125d90a355")
+  }
+}
+batch17> db.Student_det.insertMany( [ { "Rollno":1006, "Name":"Satheesh", "m1":60,"m2":70,"m3":40,"DoJ":new Date("2023-05-02"), "Subjects":["HTML","CSS","JS","MongoDB"], "Personal":{"age":21,"Email":"satheesh22@gmail.com"}}, {"Rollno":1007, "Name":"Eswar","m1":41,"m2":49,"m3":43,"DoJ":new Date("2023-06-12"),"Subjects":["HTML","CSS","JS","MongoDB"],"Personal":{"age":24,"Email":"eswaran@gmail.com"}}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64ae8917cc2f4e125d90a356"),
+    '1': ObjectId("64ae8917cc2f4e125d90a357")
+  }
+}
+
+Data Retrieval
+-----------------------------
+batch17> db.Student_det.find()
+[
+  {
+    _id: ObjectId("64ae8200cc2f4e125d90a351"),
+    Rollno: 1001,
+    Name: 'Ragul',
+    m1: 50,
+    m2: 60,
+    m3: 55,
+    DoJ: ISODate("2023-06-12T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21, Email: 'raghul21@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae855ecc2f4e125d90a352"),
+    Rollno: 1002,
+    Name: 'Ashok',
+    m1: 70,
+    m2: 80,
+    m3: 59,
+    DoJ: ISODate("2023-06-13T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21, Email: 'ashkokk11@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae855ecc2f4e125d90a353"),
+    Rollno: 1003,
+    Name: 'Kumar',
+    m1: 10,
+    m2: 9,
+    m3: 23,
+    DoJ: ISODate("2023-06-13T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 22, Email: 'kumarr@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae880ecc2f4e125d90a354"),
+    Rollno: 1004,
+    Name: 'Afrith',
+    m1: 90,
+    m2: 91,
+    m3: 99,
+    DoJ: ISODate("2023-05-20T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21, Email: 'afrith233@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae880ecc2f4e125d90a355"),
+    Rollno: 1005,
+    Name: 'Udhaya',
+    m1: 20,
+    m2: 29,
+    m3: 33,
+    DoJ: ISODate("2023-05-15T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 23, Email: 'udhaya@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae8917cc2f4e125d90a356"),
+    Rollno: 1006,
+    Name: 'Satheesh',
+    m1: 60,
+    m2: 70,
+    m3: 40,
+    DoJ: ISODate("2023-05-02T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21, Email: 'satheesh22@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae8917cc2f4e125d90a357"),
+    Rollno: 1007,
+    Name: 'Eswar',
+    m1: 41,
+    m2: 49,
+    m3: 43,
+    DoJ: ISODate("2023-06-12T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 24, Email: 'eswaran@gmail.com' }
+  }
+]
+
+batch17> db.Student_det.findOne()
+{
+  _id: ObjectId("64ae8200cc2f4e125d90a351"),
+  Rollno: 1001,
+  Name: 'Ragul',
+  m1: 50,
+  m2: 60, 
+  m3: 55,
+  DoJ: ISODate("2023-06-12T00:00:00.000Z"),
+  Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+  Personal: { age: 21, Email: 'raghul21@gmail.com' }
+}
+
+
+batch17> db.Student_det.find({"Name":"Kumar"})
+[
+  {
+    _id: ObjectId("64ae855ecc2f4e125d90a353"),
+    Rollno: 1003,
+    Name: 'Kumar',
+    m1: 10,
+    m2: 9,
+    m3: 23,
+    DoJ: ISODate("2023-06-13T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 22, Email: 'kumarr@gmail.com' }
+  }
+]
+
+batch17> db.Student_det.find({"DoJ":new Date("2023-06-12")})
+[
+  {
+    _id: ObjectId("64ae8200cc2f4e125d90a351"),
+    Rollno: 1001,
+    Name: 'Ragul',
+    m1: 50,
+    m2: 60,
+    m3: 55,
+    DoJ: ISODate("2023-06-12T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21, Email: 'raghul21@gmail.com' }
+  },
+  {
+    _id: ObjectId("64ae8917cc2f4e125d90a357"),
+    Rollno: 1007,
+    Name: 'Eswar',
+    m1: 41,
+    m2: 49,
+    m3: 43,
+    DoJ: ISODate("2023-06-12T00:00:00.000Z"),
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 24, Email: 'eswaran@gmail.com' }
+  }
+]
+
+
+batch17> db.Student_det.find({},{"Name":1,_id:0})
+[
+  { Name: 'Ragul' },
+  { Name: 'Ashok' },
+  { Name: 'Kumar' },
+  { Name: 'Afrith' },
+  { Name: 'Udhaya' },
+  { Name: 'Satheesh' },
+  { Name: 'Eswar' }
+]
+
+batch17> db.Student_det.find({},{"Name":1})
+[
+  { _id: ObjectId("64ae8200cc2f4e125d90a351"), Name: 'Ragul' },
+  { _id: ObjectId("64ae855ecc2f4e125d90a352"), Name: 'Ashok' },
+  { _id: ObjectId("64ae855ecc2f4e125d90a353"), Name: 'Kumar' },
+  { _id: ObjectId("64ae880ecc2f4e125d90a354"), Name: 'Afrith' },
+  { _id: ObjectId("64ae880ecc2f4e125d90a355"), Name: 'Udhaya' },
+  { _id: ObjectId("64ae8917cc2f4e125d90a356"), Name: 'Satheesh' },
+  { _id: ObjectId("64ae8917cc2f4e125d90a357"), Name: 'Eswar' }
+]
+
+batch17> db.Student_det.find({},{"Name":1,"Subjects":1,"Personal.age":1,_id:0})
+[
+  {
+    Name: 'Ragul',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21 }
+  },
+  {
+    Name: 'Ashok',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21 }
+  },
+  {
+    Name: 'Kumar',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 22 }
+  },
+  {
+    Name: 'Afrith',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21 }
+  },
+  {
+    Name: 'Udhaya',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 23 }
+  },
+  {
+    Name: 'Satheesh',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 21 }
+  },
+  {
+    Name: 'Eswar',
+    Subjects: [ 'HTML', 'CSS', 'JS', 'MongoDB' ],
+    Personal: { age: 24 }
+  }
+]
+
+
+batch17> db.Student_det.find({"Subjects":"HTML"},{"Name":1,"Subjects.$":1,
+"Personal.age":1,_id:0})
+[
+  { Name: 'Ragul', Subjects: [ 'HTML' ], Personal: { age: 21 } },
+  { Name: 'Ashok', Subjects: [ 'HTML' ], Personal: { age: 21 } },
+  { Name: 'Kumar', Subjects: [ 'HTML' ], Personal: { age: 22 } },
+  { Name: 'Afrith', Subjects: [ 'HTML' ], Personal: { age: 21 } },
+  { Name: 'Udhaya', Subjects: [ 'HTML' ], Personal: { age: 23 } },
+  { Name: 'Satheesh', Subjects: [ 'HTML' ], Personal: { age: 21 } },
+  { Name: 'Eswar', Subjects: [ 'HTML' ], Personal: { age: 24 } }
+]
+
+Count
+----------------
+batch17> db.Student_det.find().count()
+7
+
+Sorting
+--------------------
+
+batch17> db.Student_det.find({},{Name:1,_id:0}).sort({Name:1})
+[
+  { Name: 'Afrith' },
+  { Name: 'Ashok' },
+  { Name: 'Eswar' },
+  { Name: 'Kumar' },
+  { Name: 'Ragul' },
+  { Name: 'Satheesh' },
+  { Name: 'Udhaya' }
+]
+batch17> db.Student_det.find({},{Name:1,_id:0}).sort({Name:-1})
+[
+  { Name: 'Udhaya' },
+  { Name: 'Satheesh' },
+  { Name: 'Ragul' },
+  { Name: 'Kumar' },
+  { Name: 'Eswar' },
+  { Name: 'Ashok' },
+  { Name: 'Afrith' }
+]
+
+
+batch17> db.Student_det.find({},{Name:1,DoJ:1,_id:0}).sort({DoJ:1})
+[
+  { Name: 'Satheesh', DoJ: ISODate("2023-05-02T00:00:00.000Z") },
+  { Name: 'Udhaya', DoJ: ISODate("2023-05-15T00:00:00.000Z") },
+  { Name: 'Afrith', DoJ: ISODate("2023-05-20T00:00:00.000Z") },
+  { Name: 'Ragul', DoJ: ISODate("2023-06-12T00:00:00.000Z") },
+  { Name: 'Eswar', DoJ: ISODate("2023-06-12T00:00:00.000Z") },
+  { Name: 'Ashok', DoJ: ISODate("2023-06-13T00:00:00.000Z") },
+  { Name: 'Kumar', DoJ: ISODate("2023-06-13T00:00:00.000Z") }
+]
+
+limit and skip
+------------------------
+batch17> db.Student_det.find({},{Name:1,DoJ:1,_id:0}).sort({DoJ:1}).limit(3);
+[
+  { Name: 'Satheesh', DoJ: ISODate("2023-05-02T00:00:00.000Z") },
+  { Name: 'Udhaya', DoJ: ISODate("2023-05-15T00:00:00.000Z") },
+  { Name: 'Afrith', DoJ: ISODate("2023-05-20T00:00:00.000Z") }
+]
+
+batch17> db.Student_det.find({},{Name:1,DoJ:1,_id:0}).sort({DoJ:1}).limit(2).skip(5);
+[
+  { Name: 'Ashok', DoJ: ISODate("2023-06-13T00:00:00.000Z") },
+  { Name: 'Kumar', DoJ: ISODate("2023-06-13T00:00:00.000Z") }
+]
+
+Comparision Operator
+-------------------------------
+
+batch17> db.Student_det.find({m1:{$gte:40}},{Name:1,m1:1,m2:1,m3:1,_id:0});
+[
+  { Name: 'Ragul', m1: 50, m2: 60, m3: 55 },
+  { Name: 'Ashok', m1: 70, m2: 80, m3: 59 },
+  { Name: 'Afrith', m1: 90, m2: 91, m3: 99 },
+  { Name: 'Satheesh', m1: 60, m2: 70, m3: 40 },
+  { Name: 'Eswar', m1: 41, m2: 49, m3: 43 }
+]
+
+batch17> db.Student_det.find({m1:{$lt:40}},{Name:1,m1:1,m2:1,m3:1,_id:0});
+[
+  { Name: 'Kumar', m1: 10, m2: 9, m3: 23 },
+  { Name: 'Udhaya', m1: 20, m2: 29, m3: 33 }
+]
+
+batch17> db.Student_det.find({m2:{$ne:80}},{Name:1,m2:1,_id:0});
+[
+  { Name: 'Ragul', m2: 60 },
+  { Name: 'Kumar', m2: 9 },
+  { Name: 'Afrith', m2: 91 },
+  { Name: 'Udhaya', m2: 29 },
+  { Name: 'Satheesh', m2: 70 },
+  { Name: 'Eswar', m2: 49 }
+]
+
+batch17> db.Student_det.find({m3:{$in:[10,20,30,40,55]}},{Name:1,m3:1,_id:0});
+[ { Name: 'Ragul', m3: 55 }, { Name: 'Satheesh', m3: 40 } ]
+
+
+Logical OPerator
+-------------------------
+
+And:
+----------
+batch17> db.Student_det.find({$and:[{m1:{$gte:40}}, {m2:{$gte:40}},{m3:{$gte:40}}]},
+{Name:1,m1:1,m2:1,m3:1,_id:0});
+
+[
+  { Name: 'Ragul', m1: 50, m2: 60, m3: 55 },
+  { Name: 'Ashok', m1: 70, m2: 80, m3: 59 },
+  { Name: 'Afrith', m1: 90, m2: 91, m3: 99 },
+  { Name: 'Satheesh', m1: 60, m2: 70, m3: 40 },
+  { Name: 'Eswar', m1: 41, m2: 49, m3: 43 }
+]
+
+OR
+------
+batch17> db.Student_det.find({$or:[{m1:{$lt:40}}, {m2:{$lt:40}},{m3:{$lt:40}}]},
+{Name:1,m1:1,m2:1,m3:1,_id:0});
+
+[
+  { Name: 'Kumar', m1: 10, m2: 9, m3: 23 },
+  { Name: 'Udhaya', m1: 20, m2: 29, m3: 33 }
+]
+
+nor
+-------
+batch17> db.Student_det.find({$nor:[{Name:"Ragul"}]},{Name:1,m1:1,m2:1,m3:1,_id:0});
+[
+  { Name: 'Ashok', m1: 70, m2: 80, m3: 59 },
+  { Name: 'Kumar', m1: 10, m2: 9, m3: 23 },
+  { Name: 'Afrith', m1: 90, m2: 91, m3: 99 },
+  { Name: 'Udhaya', m1: 20, m2: 29, m3: 33 },
+  { Name: 'Satheesh', m1: 60, m2: 70, m3: 40 },
+  { Name: 'Eswar', m1: 41, m2: 49, m3: 43 }
+]

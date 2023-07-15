@@ -1,0 +1,383 @@
+
+test> use batch17;
+switched to db batch17
+
+batch17> db.createCollection("DemoArray")
+{ ok: 1 }
+
+batch17> show collections
+DemoArray
+Employee
+Student_det
+
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Sun', 'Mon' ]
+  }
+]
+batch17> db.DemoArray.updateOne({Name:"Days"},{$push:{"Days":"Tues"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Sun', 'Mon', 'Tues' ]
+  }
+]
+
+batch17> db.DemoArray.updateOne({Name:"Days"},{$pop:{"Days":1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Sun', 'Mon' ]
+  }
+]
+batch17> db.DemoArray.updateOne({Name:"Days"},{$pop:{"Days":-1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Mon' ]
+  }
+]
+
+
+batch17> db.DemoArray.updateOne({Name:"Days"},
+{$push:{Days:{$each:["Tues","Wed","Thurs","Fri"]}}})
+
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri' ]
+  }
+]
+
+Pull to remove data anywhere in the array
+-----------------------------------------------------
+
+batch17> db.DemoArray.updateOne({Name:"Days"},{$pull:{Days:"Wed"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Mon', 'Tues', 'Thurs', 'Fri' ]
+  }
+]
+
+batch17> db.DemoArray.updateOne({Name:"Days"},{$pull:{Days:{$in:["Thurs","Fri"]}}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+batch17> db.DemoArray.find()
+[
+  {
+    _id: ObjectId("64b0e1d2bef7317d1fc95708"),
+    Name: 'Days',
+    Days: [ 'Mon', 'Tues' ]
+  }
+]
+
+batch17> db.Employee.remove({Empno:789})
+
+
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
+
+
+batch17> db.Employee.find()
+[
+  {
+    _id: ObjectId("64af93928903b9454e3dbede"),
+    Empno: 1023,
+    Empname: 'Rajesh',
+    Salary: 27000,
+    Gender: 'Male',
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93928903b9454e3dbedf"),
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93928903b9454e3dbee0"),
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee1"),
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Gender: 'Female',
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee2"),
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee3"),
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee4"),
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee5"),
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 75000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee6"),
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64afd8696b0b147f0250e331"),
+    Empno: 1500,
+    Company_Name: 'Jerry Solution',
+    Department: 'HR',
+    Empname: 'Mithun Chakaravarthi',
+    Gender: 'Male',
+    Salary: 39800
+  }
+]
+
+Delete
+-----------------
+
+batch17> db.Employee.deleteOne({Empname:"Vivek"})
+{ acknowledged: true, deletedCount: 1 }
+
+batch17> db.Employee.find()
+[
+  {
+    _id: ObjectId("64af93928903b9454e3dbede"),
+    Empno: 1023,
+    Empname: 'Rajesh',
+    Salary: 27000,
+    Gender: 'Male',
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93928903b9454e3dbedf"),
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93928903b9454e3dbee0"),
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee1"),
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Gender: 'Female',
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee2"),
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee3"),
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee4"),
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee6"),
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64afd8696b0b147f0250e331"),
+    Empno: 1500,
+    Company_Name: 'Jerry Solution',
+    Department: 'HR',
+    Empname: 'Mithun Chakaravarthi',
+    Gender: 'Male',
+    Salary: 39800
+  }
+]
+
+
+batch17> db.Employee.deleteMany({Department:"HR"})
+{ acknowledged: true, deletedCount: 3 }
+
+
+batch17> db.Employee.find()
+[
+  {
+    _id: ObjectId("64af93928903b9454e3dbedf"),
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93928903b9454e3dbee0"),
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee2"),
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af93f38903b9454e3dbee3"),
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee4"),
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Gender: 'Male',
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    _id: ObjectId("64af94438903b9454e3dbee6"),
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Gender: 'Female',
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  }
+]
+batch17>

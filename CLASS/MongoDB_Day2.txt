@@ -1,0 +1,471 @@
+Day 2:13/07/2023
+---------------------
+
+Aggregate Function
+--------------------
+
+1. group
+-----------
+
+batch17> db.Emp_det.aggregate([{$group:{_id:"$Department"}}])
+
+[ { _id: 'HR' }, { _id: 'Admin' }, { _id: 'Marketing' } ]
+
+
+batch17> db.Emp_det.aggregate([{$group:{_id:"$Department", Total_Employee:{$sum:1}}}])
+[
+  { _id: 'HR', Total_Employee: 2 },
+  { _id: 'Admin', Total_Employee: 3 },
+  { _id: 'Marketing', Total_Employee: 4 }
+]
+
+
+batch17> db.Emp_det.aggregate([{$match:{"Gender":"Male"}},
+{$group:{_id:"$Department",Total_Salary:{$sum:"$Salary"}}}])
+[
+  { _id: 'HR', Total_Salary: 45690 },
+  { _id: 'Marketing', Total_Salary: 96500 }
+]
+
+batch17> db.Emp_det.aggregate([{$match:{"Gender":"Female"}},
+{$group:{_id:"$Department",Total_Salary:{$sum:"$Salary"}}}])
+[
+  { _id: 'Admin', Total_Salary: 46000 },
+  { _id: 'HR', Total_Salary: 46690 }
+]
+
+batch17> db.Emp_det.aggregate([{$match:{"Gender":"Female"}},
+{$group:{_id:"$Department",Total_Salary:{$avg:"$Salary"}}}])
+[
+  { _id: 'HR', Total_Salary: 46690 },
+  { _id: 'Admin', Total_Salary: 15333.333333333334 }
+]
+
+batch17> db.Emp_det.aggregate([{$match:{"Gender":"Male"}},
+{$group:{_id:"$Department",Total_Salary:{$avg:"$Salary"}}}])
+[
+  { _id: 'HR', Total_Salary: 45690 },
+  { _id: 'Marketing', Total_Salary: 24125 }
+]
+
+batch17> db.Emp_det.aggregate([{$group:{_id:"$Department",Total_Salary:{$max:"$Salary"}}}])
+[
+  { _id: 'HR', Total_Salary: 46690 },
+  { _id: 'Admin', Total_Salary: 16000 },
+  { _id: 'Marketing', Total_Salary: 25000 }
+]
+
+batch17> db.Emp_det.aggregate([{$group:{_id:"$Department",Total_Salary:{$min:"$Salary"}}}])
+[
+  { _id: 'Marketing', Total_Salary: 23500 },
+  { _id: 'Admin', Total_Salary: 15000 },
+  { _id: 'HR', Total_Salary: 45690 }
+
+
+
+Update
+------------
+batch17> db.Emp_det.updateOne({"Empno":1006},{$set:{"Empname":"Saileshpal"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+batch17> db.Student_det.updateMany({},{$currentDate:{"DoJ":true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 7,
+  modifiedCount: 7,
+  upsertedCount: 0
+}
+
+batch17> db.Emp_det.updateMany({Department:"Marketing"},{$inc:{Salary:1000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+
+batch17> db.Emp_det.find({},{Empno:1,Empname:1,Salary:1,Department:1,_id:0})
+[
+  { Empno: 1023, Empname: 'Rajesh', Salary: 45690, Department: 'HR' },
+  {
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Department: 'Marketing'
+  },
+  { Empno: 1230, Empname: 'Priya', Salary: 15000, Department: 'Admin' },
+  {
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Department: 'HR'
+  },
+  {
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Department: 'Marketing'
+  },
+  {
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Department: 'Admin'
+  },
+  {
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Department: 'Marketing'
+  },
+  {
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 25000,
+    Department: 'Marketing'
+  },
+  { Empno: 1233, Empname: 'Jeeva', Salary: 16000, Department: 'Admin' }
+]
+
+batch17> db.Emp_det.updateMany({Empname:"Rajesh"},{$max:{Salary:47000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+batch17> db.Emp_det.updateOne({"Empname":"Vivek"},{$mul:{Salary:3}})
+
+
+batch17> db.Emp_det.updateOne({Empname:"Jeeva"},{$unset:{Empno:""}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+batch17> db.Emp_det.find({},{Empno:1,Empname:1,Salary:1,Department:1,_id:0})
+[
+  { Empno: 1023, Empname: 'Rajesh', Salary: 27000, Department: 'HR' },
+  {
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Department: 'Marketing'
+  },
+  { Empno: 1230, Empname: 'Priya', Salary: 15000, Department: 'Admin' },
+  {
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Department: 'HR'
+  },
+  {
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Department: 'Marketing'
+  },
+  {
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Department: 'Admin'
+  },
+  {
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Department: 'Marketing'
+  },
+  {
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 75000,
+    Department: 'Marketing'
+  },
+  { Empname: 'Jeeva', Salary: 16000, Department: 'Admin' }
+]
+
+batch17> db.Emp_det.updateMany({},{$set:{"Company":"Jerry Solutions"}})
+{
+  acknowledged: true,ed token, expected "," (1:60)
+  insertedId: null,
+  matchedCount: 9,
+  modifiedCount: 9,                                              
+  upsertedCount: 0
+}
+batch17> db.Emp_det.find({},{Empno:1,Empname:1,Salary:1,Department:1,Company:1,_id:0})
+[
+  {
+    Empno: 1023,
+    Empname: 'Rajesh',
+    Salary: 27000,
+    Department: 'HR',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Department: 'Marketing',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Department: 'Admin',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Department: 'HR',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Department: 'Marketing',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Department: 'Admin',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Department: 'Marketing',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 75000,
+    Department: 'Marketing',
+    Company: 'Jerry Solutions'
+  },
+  {
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Department: 'Admin',
+    Company: 'Jerry Solutions'
+  }
+]
+
+batch17> db.Emp_det.updateMany({},{$rename:{"Company":"Company_Name"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 9,
+  modifiedCount: 9,
+  upsertedCount: 0
+}
+
+batch17> db.Emp_det.renameCollection("Employee");
+{ ok: 1 }
+
+batch17> db.Emp_det.find({},{Empno:1,Empname:1,Salary:1,Department:1,Company_Name:1,_id:0})
+
+batch17> db.Employee.find({},{Empno:1,Empname:1,Salary:1,Department:1,Company_Name:1,_id:0})
+[
+  {
+    Empno: 1023,
+    Empname: 'Rajesh',
+    Salary: 27000,
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 75000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  }
+]
+
+
+Upsert
+-----------
+
+batch17> db.Employee.updateOne({Empno:1500},{$set:{Empname:"Mithun",
+Gender:"Male",Salary:37800.00,Department:"HR",Company_Name:"Jerry Solution"}},
+{upsert:true})
+
+
+{
+  acknowledged: true,
+  insertedId: ObjectId("64afd8696b0b147f0250e331"),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+
+batch17> db.Employee.updateOne({Empno:1500},{$set:
+{Empname:"Mithun Chakaravarthi",Gender:"Male",Salary:39800.00,Department:"HR",
+Company_Name:"Jerry Solution"}},{upsert:true})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+batch17> db.Employee.findAndModify({query:{Empno:789},update:{$set:{
+Empname:"Hari",Gender:"Male",Salary:35000.00,Department:"Developer",
+Company_Name:"Jerry Solution"}},upsert:true})
+
+
+null
+
+batch17> db.Employee.find({},{Empno:1,Empname:1,Salary:1,Department:1,Company_Name:1,_id:0})
+[
+  {
+    Empno: 1023,
+    Empname: 'Rajesh',
+    Salary: 27000,
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1056,
+    Empname: 'Peter',
+    Salary: 24500,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1230,
+    Empname: 'Priya',
+    Salary: 15000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1024,
+    Empname: 'Mahalakshmi',
+    Salary: 46690,
+    Department: 'HR',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1005,
+    Empname: 'Ram',
+    Salary: 25000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1231,
+    Empname: 'Lalitha',
+    Salary: 15000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1006,
+    Empname: 'Saileshpal',
+    Salary: 26000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1007,
+    Empname: 'Vivek',
+    Salary: 75000,
+    Department: 'Marketing',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empname: 'Jeeva',
+    Salary: 16000,
+    Department: 'Admin',
+    Company_Name: 'Jerry Solutions'
+  },
+  {
+    Empno: 1500,
+    Company_Name: 'Jerry Solution',
+    Department: 'HR',
+    Empname: 'Mithun Chakaravarthi',
+    Salary: 39800
+  },
+  {
+    Empno: 789,
+    Company_Name: 'Jerry Solution',
+    Department: 'Developer',
+    Empname: 'Hari',
+    Salary: 35000
+  }
+]
