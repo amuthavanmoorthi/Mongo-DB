@@ -1,0 +1,227 @@
+1.  Create a Student Table to store name, age and score of students
+
+kg> db.createCollection("Student")
+{ ok: 1 }
+kg> db.Student.insert({"name":"String","age":"number","score":"floating point"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b02e0aef610e932776720f") }
+}
+kg> db.Select.find()
+
+kg> db.Student.find()
+[
+  {
+    _id: ObjectId("64b02e0aef610e932776720f"),
+    name: 'String',
+    age: 'number',
+    score: 'floating point'
+  }
+]
+
+
+2. In a typical e-commerce application, we need to store the following customer details.
+
+kg> db.createCollection("customer")
+{ ok: 1 }
+kg> db.customer.insert({"Custmerid":1,"first name":"amudhavan","last name":"moorthy","dob":new Date("2023-07-12"),"address":"anbu nagar, trichy","phone number":98866387})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0309def610e9327767210") }
+}
+kg> db.customer.find()
+[
+  {
+    _id: ObjectId("64b0309def610e9327767210"),
+    Custmerid: 1,
+    'first name': 'amudhavan',
+    'last name': 'moorthy',
+    dob: ISODate("2023-07-12T00:00:00.000Z"),
+    address: 'anbu nagar, trichy',
+    'phone number': 98866387
+  }
+]
+
+
+
+3. In a typical e-commerce application, we need to store the following order details.
+
+kg> db.order_det.find()
+[
+  {
+    _id: ObjectId("64b03315ef610e9327767212"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  }
+]
+
+4. To insert at least 6 documents in all collection.
+
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b03315ef610e9327767212") }
+}
+kg> db.order_det.find()
+[
+  {
+    _id: ObjectId("64b03315ef610e9327767212"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  }
+]
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b03383ef610e9327767213") }
+}
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b03384ef610e9327767214") }
+}
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b03385ef610e9327767215") }
+}
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b03389ef610e9327767216") }
+}
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0338aef610e9327767217") }
+}
+kg> db.order_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0338bef610e9327767218") }
+}
+
+
+
+5. To display documents in a pretty format using find ().
+
+kg> db.order_det.find().pretty()
+[
+  {
+    _id: ObjectId("64b03315ef610e9327767212"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b03383ef610e9327767213"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b03384ef610e9327767214"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b03385ef610e9327767215"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b03389ef610e9327767216"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b0338aef610e9327767217"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  },
+  {
+    _id: ObjectId("64b0338bef610e9327767218"),
+    Orderid: 1,
+    'customer id': 1,
+    order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+    shipped_datetime: ISODate("2023-07-12T09:34:00.000Z"),
+    Total_amount: 56.78
+  }
+]
+
+
+6. Create a database as Employee and create collection as emp_det, insert five documents and remove collection and delete the employee. Use drop () and show method to differentiate deletion of collections and database.
+
+
+kg> use employee
+switched to db employeeDate("2023-02-12T12:56:34.000Z"),
+employee> db.employee.createCollection("emp_det")
+TypeError: db.employee.createCollection is not a function
+employee> db.createCollection("emp_det")
+{ ok: 1 }
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{   'customer id': 1,
+  acknowledged: true,SODate("2023-02-12T12:56:34.000Z"),
+  insertedIds: { '0': ObjectId("64b035bdef610e9327767219") }
+}   Total_amount: 56.78
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{   _id: ObjectId("64b0338bef610e9327767218"),
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b035c0ef610e932776721a") }
+}   order_datetime: ISODate("2023-02-12T12:56:34.000Z"),
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{ }
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b035c1ef610e932776721b") }
+}
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b035c2ef610e932776721c") }
+}
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b035c3ef610e932776721d") }
+}
+employee> db.emp_det.insert({"Orderid":1,"customer id":1,"order_datetime":new ISODate("2023-02-12T12:56:34"),"shipped_datetime":new ISODate("2023-07-12T09:34:00"),"Total_amount":56.78})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b035c3ef610e932776721e") }
+}
+employee> drop("emp_det")
+ReferenceError: drop is not defined
+employee> db.emp_det.Drop()
+TypeError: db.emp_det.Drop is not a function
+employee> db.emp_det.drop()
+true
+employee> db.drop().Database
+TypeError: db.drop is not a function
+employee> db.drop().employee
+TypeError: db.drop is not a function
+employee> db.dropDatabase()
+{ ok: 1, dropped: 'employee' }
+
