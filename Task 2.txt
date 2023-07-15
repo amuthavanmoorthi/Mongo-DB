@@ -1,0 +1,448 @@
+
+1.  Create a Student Table to store name, course,m1,m2,m3,subjects:["HTML",CSS","MongoDB"],personal:{age,dob,father name,mobile number,email id,address}  of students
+
+
+
+
+kg> db.createCollection("students")
+{ ok: 1 }
+kg> db.students.insert({"name":"","course":"","m1": ,"m2"})
+Uncaught:
+SyntaxError: Unexpected token (1:48)
+
+> 1 | db.students.insert({"name":"","course":"","m1": ,"m2"})
+    |                                                 ^
+  2 |
+kg> db.students.insert({"name":"","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a29af05d02c1c3b75b6d") }
+}
+
+
+
+
+2.  Insert at least 10 documents in a student table using insertMany().
+
+
+kg> db.students.insertMany([{"name":"amudhavan","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a379f05d02c1c3b75b6e") }
+}
+kg> db.students.insertMany([{"name":"mithun","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a38bf05d02c1c3b75b6f") }
+}
+kg> db.students.insertMany([{"name":"vnil","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a39ef05d02c1c3b75b70") }
+}
+kg> db.students.insertMany([{"name":"prasanth","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3adf05d02c1c3b75b71") }
+}
+kg> db.students.insertMany([{"name":"sudharsan","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3bdf05d02c1c3b75b72") }
+}
+kg> db.students.insertMany([{"name":"hari kumar","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3cff05d02c1c3b75b73") }
+}
+kg> db.students.insertMany([{"name":"jass","course":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3dbf05d02c1c3b75b74") }
+}
+kg> db.students.insertMany([{"name":"jass","aravind":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3eef05d02c1c3b75b75") }
+}
+kg> db.students.insertMany([{"name":"jass","sailesh":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a3fef05d02c1c3b75b76") }
+}
+kg> db.students.insertMany([{"name":"jass","kameshawar":"","m1": 1,"m2":2,"m3":3,"subjects":["html","css","mongodb"],"personal":{"age":20,"dob":new Date(2002-10-21), "father":"moorthy", "mobile":9829348, "email":"amuthavanmoorthi@gaual.com", "address":"trichy"}}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b0a411f05d02c1c3b75b77") }
+}
+kg>
+
+
+
+
+3. Find all documents in the collection of the student.
+
+
+
+kg> db.students.find()
+[
+  {
+    _id: ObjectId("64b0a29af05d02c1c3b75b6d"),
+    name: '',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a379f05d02c1c3b75b6e"),
+    name: 'amudhavan',
+kg>
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a38bf05d02c1c3b75b6f"),
+    name: 'mithun',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a39ef05d02c1c3b75b70"),
+    name: 'vnil',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3adf05d02c1c3b75b71"),
+    name: 'prasanth',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3bdf05d02c1c3b75b72"),
+    name: 'sudharsan',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3cff05d02c1c3b75b73"),
+    name: 'hari kumar',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3dbf05d02c1c3b75b74"),
+    name: 'jass',
+    course: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+kg>
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3eef05d02c1c3b75b75"),
+    name: 'jass',
+    aravind: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a3fef05d02c1c3b75b76"),
+    name: 'jass',
+    sailesh: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  },
+  {
+    _id: ObjectId("64b0a411f05d02c1c3b75b77"),
+    name: 'jass',
+    kameshawar: '',
+    m1: 1,
+    m2: 2,
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }
+  }
+]
+
+
+
+
+4. Find first documents in the collection of the student.
+
+
+
+kg> db.students.find({"name":"amudhavan"})
+[   personal: {
+  {   age: 20,
+    _id: ObjectId("64b0a379f05d02c1c3b75b6e"),,
+    name: 'amudhavan',',
+    course: '',829348,
+    m1: 1,l: 'amuthavanmoorthi@gaual.com',
+    m2: 2,ess: 'trichy'
+    m3: 3,
+    subjects: [ 'html', 'css', 'mongodb' ],
+    personal: {
+      age: 20,tId("64b0a3fef05d02c1c3b75b76"),
+      dob: ISODate("1970-01-01T00:00:01.971Z"),
+      father: 'moorthy',
+      mobile: 9829348,
+      email: 'amuthavanmoorthi@gaual.com',
+      address: 'trichy'
+    }ubjects: [ 'html', 'css', 'mongodb' ],
+  } personal: {
+]     age: 20,
+
+
+
+
+5. Retrieve student's documents whose student course is B.E CSE.
+
+kg> db.students.find({"course":"html","course":"css","course":"mongodb"})
+
+
+
+6. Retrieve only student name fields with the help of projection.
+
+
+
+kg> db.students.find({},{"name":1})
+[
+  { _id: ObjectId("64b0a29af05d02c1c3b75b6d"), name: '' },
+  { _id: ObjectId("64b0a379f05d02c1c3b75b6e"), name: 'amudhavan' },
+  { _id: ObjectId("64b0a38bf05d02c1c3b75b6f"), name: 'mithun' },
+  { _id: ObjectId("64b0a39ef05d02c1c3b75b70"), name: 'vnil' },
+  { _id: ObjectId("64b0a3adf05d02c1c3b75b71"), name: 'prasanth' },
+  { _id: ObjectId("64b0a3bdf05d02c1c3b75b72"), name: 'sudharsan' },
+  { _id: ObjectId("64b0a3cff05d02c1c3b75b73"), name: 'hari kumar' },
+  { _id: ObjectId("64b0a3dbf05d02c1c3b75b74"), name: 'jass' },
+  { _id: ObjectId("64b0a3eef05d02c1c3b75b75"), name: 'jass' },
+  { _id: ObjectId("64b0a3fef05d02c1c3b75b76"), name: 'jass' },
+  { _id: ObjectId("64b0a411f05d02c1c3b75b77"), name: 'jass' }
+]
+
+
+
+7.
+
+kg> db.students.find({},{"name":1,"course":1,"personal.mobile":1})
+[
+  {
+    _id: ObjectId("64b0a29af05d02c1c3b75b6d"),
+    name: '',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a379f05d02c1c3b75b6e"),
+    name: 'amudhavan',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a38bf05d02c1c3b75b6f"),
+    name: 'mithun',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a39ef05d02c1c3b75b70"),
+    name: 'vnil',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3adf05d02c1c3b75b71"),
+    name: 'prasanth',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3bdf05d02c1c3b75b72"),
+    name: 'sudharsan',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3cff05d02c1c3b75b73"),
+    name: 'hari kumar',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3dbf05d02c1c3b75b74"),
+    name: 'jass',
+    course: '',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3eef05d02c1c3b75b75"),
+    name: 'jass',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a3fef05d02c1c3b75b76"),
+    name: 'jass',
+    personal: { mobile: 9829348 }
+  },
+  {
+    _id: ObjectId("64b0a411f05d02c1c3b75b77"),
+    name: 'jass',
+    personal: { mobile: 9829348 }
+  }
+]
+
+
+8.
+
+kg> db.students.find({m1:{$gt:70}},{"name":1,"m1":1})
+
+9. kg> db.students.find({m2:{$lt:70}},{"name":1,"m2":1})
+
+
+10. kg> db.students.find({name:{$eq:"jass"}},{"name":1})
+[
+  { _id: ObjectId("64b0a3dbf05d02c1c3b75b74"), name: 'jass' },
+  { _id: ObjectId("64b0a3eef05d02c1c3b75b75"), name: 'jass' },
+  { _id: ObjectId("64b0a3fef05d02c1c3b75b76"), name: 'jass' },
+  { _id: ObjectId("64b0a411f05d02c1c3b75b77"), name: 'jass' }
+]
+kg>
+
+
+11.
+
+kg> db.students.find({name:{$ne:"jass"}},{"name":1})
+[
+  { _id: ObjectId("64b0a29af05d02c1c3b75b6d"), name: '' },
+  { _id: ObjectId("64b0a379f05d02c1c3b75b6e"), name: 'amudhavan' },
+  { _id: ObjectId("64b0a38bf05d02c1c3b75b6f"), name: 'mithun' },
+  { _id: ObjectId("64b0a39ef05d02c1c3b75b70"), name: 'vnil' },
+  { _id: ObjectId("64b0a3adf05d02c1c3b75b71"), name: 'prasanth' },
+  { _id: ObjectId("64b0a3bdf05d02c1c3b75b72"), name: 'sudharsan' },
+  { _id: ObjectId("64b0a3cff05d02c1c3b75b73"), name: 'hari kumar' }
+]
+kg>
+
+
+
+
+
+
+
+
+
+
+
+
