@@ -1,0 +1,281 @@
+1. To retrieve student details whose marks are greater than 40 using logical operator.
+
+kamesh> db.Student_Table.find({"M1":{"$not":{"$lt":40}}})
+[
+  {
+    _id: ObjectId("64af9c1f3ef2237f518ac52d"),
+    Name: 'Sudharsanan',
+    Course: 'SP',
+    M1: 78,
+    M2: 82,
+    M3: 87,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 22,
+      Dob: '2002-11-05',
+      'Father name': 'Ashok',
+      'Mobile number': 987456321,
+      email: 'ashok@gmail.com',
+      Address: 'Namakkal'
+    }
+  },
+  {
+    _id: ObjectId("64afae6a3ef2237f518ac52e"),
+    Name: 'Ashoke',
+    Course: 'SP',
+    M1: 68,
+    M2: 84,
+    M3: 80,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 21,
+      Dob: '2003-11-05',
+      'Father name': 'Billa',
+      'Mobile number': 897456321,
+      email: 'billa@gmail.com',
+      Address: 'Coimbatore'
+    }
+  },
+  {
+    _id: ObjectId("64afae6a3ef2237f518ac52f"),
+    Name: 'Subash',
+    Course: 'SP',
+    M1: 69,
+    M2: 50,
+    M3: 65,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 22,
+      Dob: '2001-06-26',
+      'Father name': 'Bose',
+      'Mobile number': 654987321,
+      email: 'bose@gmail.com',
+      Address: 'Malumichampatti'
+    }
+  },
+  {
+    _id: ObjectId("64afaf043ef2237f518ac530"),
+    Name: 'Prasanth',
+    Course: 'SP',
+    M1: 70,
+    M2: 54,
+    M3: 90,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 22,
+      Dob: '2002-09-05',
+      'Father name': 'Kutty',
+      'Mobile number': 657456321,
+      email: 'kutty@gmail.com',
+      Address: 'Tirupur'
+    }
+  },
+  {
+    _id: ObjectId("64afaf043ef2237f518ac531"),
+    Name: 'Bharathi',
+    Course: 'SP',
+    M1: 59,
+    M2: 60,
+    M3: 75,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 23,
+      Dob: '2000-06-26',
+      'Father name': 'Raja',
+      'Mobile number': 684987321,
+      email: 'raja@gmail.com',
+      Address: 'Thindukal'
+    }
+  },
+  {
+    _id: ObjectId("64afafaf3ef2237f518ac532"),
+    Name: 'Mithun',
+    Course: 'WD',
+    M1: 78,
+    M2: 54,
+    M3: 80,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 23,
+      Dob: '2003-09-05',
+      'Father name': 'Chakaravathi',
+      'Mobile number': 697456321,
+      email: 'chakaravathi@gmail.com',
+      Address: 'Kallakurichi'
+    }
+  },
+  {
+    _id: ObjectId("64afafaf3ef2237f518ac533"),
+    Name: 'Aravind',
+    Course: 'SP',
+    M1: 79,
+    M2: 60,
+    M3: 65,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 29,
+      Dob: '1995-03-26',
+      'Father name': 'Manikandan',
+      'Mobile number': 468987321,
+      email: 'manikandan@gmail.com',
+      Address: 'Coimbatore'
+    }
+  },
+  {
+    _id: ObjectId("64afb0603ef2237f518ac534"),
+    Name: 'Hari',
+    Course: 'WD',
+    M1: 45,
+    M2: 54,
+    M3: 51,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 24,
+      Dob: '1999-09-05',
+      'Father name': 'Kumar',
+      'Mobile number': 769456321,
+      email: 'kumar@gmail.com',
+      Address: 'Chennai'
+    }
+  },
+  {
+    _id: ObjectId("64afb0603ef2237f518ac535"),
+    Name: 'Elavarasan',
+    Course: 'SP',
+    M1: 79,
+    M2: 90,
+    M3: 85,
+    Subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    Personal: {
+      Age: 22,
+      Dob: '2002-03-26',
+      'Father name': 'Prince',
+      'Mobile number': 598987321,
+      email: 'prince@gmail.com',
+      Address: 'Coimbatore'
+    }
+  }
+]
+
+
+2.  To retrieve only student name and course who failed in all subjects.
+
+kamesh> db.Student_Table.find({$or:[{M1:{$lt:40}},{M2:{$lt:40}},{M3:{$lt:40}}]},{Name:1,M1:1,M2:1,M3:1,_id:0})
+[ { Name: 'Kamali', M1: 35, M2: 10, M3: 1 } ]
+
+3.  To retrieve only student name and course who failed in only one subject.
+
+kamesh> db.Student_Table.find({$or:[{M1:{$lt:40}},{M2:{$lt:40}},{M3:{$lt:40}}]},{Name:1,M1:1,M2:1,M3:1,_id:0})
+[
+  { Name: 'Kamali', M1: 35, M2: 10, M3: 1 },
+  { Name: 'Jerena', M1: 78, M2: 42, M3: 39 }
+]
+
+4. To retrieve student documents whose subjects only in HTML,MongoDB using in operator
+kamesh> db.Student_Table.find({Subjects:{$eq:["HTML","MongoDB"]}},{Name:1,_id:0})
+[ { Name: 'Afrith' } ]
+
+5. To retrieve students documents whose age not greater than 21.
+
+kamesh> db.Student_Table.find({"Personal.Age":{$lte:21}},{Name:1,"Personal.Age":1,_id:0})
+[
+  { Name: 'Ashoke', Personal: { Age: 21 } },
+  { Name: 'Mani', Personal: { Age: 20 } }
+]
+
+6. To display only two documents  by using limt() method.
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Age":1,_id:0}).sort({Name:1}).limit(2)
+[
+  { Name: 'Afrith', Personal: { Age: 24 } },
+  { Name: 'Aravind', Personal: { Age: 29 } }
+]
+
+7. To display only two documents  and skip 2 documents.
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Age":1,_id:0}).sort({Name:1}).limit(2).skip(2)
+[
+  { Name: 'Ashoke', Personal: { Age: 21 } },
+  { Name: 'Bharathi', Personal: { Age: 23 } }
+]
+
+8. To sort the name in ascending and descending order.
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Age":1,_id:0}).sort({Name:1})
+[
+  { Name: 'Afrith', Personal: { Age: 24 } },
+  { Name: 'Aravind', Personal: { Age: 29 } },
+  { Name: 'Ashoke', Personal: { Age: 21 } },
+  { Name: 'Bharathi', Personal: { Age: 23 } },
+  { Name: 'Elavarasan', Personal: { Age: 22 } },
+  { Name: 'Hari', Personal: { Age: 24 } },
+  { Name: 'Jerena', Personal: { Age: 25 } },
+  { Name: 'Kamali', Personal: { Age: 22 } },
+  { Name: 'Mani', Personal: { Age: 20 } },
+  { Name: 'Mithun', Personal: { Age: 23 } },
+  { Name: 'Prasanth', Personal: { Age: 22 } },
+  { Name: 'Subash', Personal: { Age: 22 } },
+  { Name: 'Sudharsanan', Personal: { Age: 22 } }
+]
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Age":1,_id:0}).sort({Name:-1})
+[
+  { Name: 'Sudharsanan', Personal: { Age: 22 } },
+  { Name: 'Subash', Personal: { Age: 22 } },
+  { Name: 'Prasanth', Personal: { Age: 22 } },
+  { Name: 'Mithun', Personal: { Age: 23 } },
+  { Name: 'Mani', Personal: { Age: 20 } },
+  { Name: 'Kamali', Personal: { Age: 22 } },
+  { Name: 'Jerena', Personal: { Age: 25 } },
+  { Name: 'Hari', Personal: { Age: 24 } },
+  { Name: 'Elavarasan', Personal: { Age: 22 } },
+  { Name: 'Bharathi', Personal: { Age: 23 } },
+  { Name: 'Ashoke', Personal: { Age: 21 } },
+  { Name: 'Aravind', Personal: { Age: 29 } },
+  { Name: 'Afrith', Personal: { Age: 24 } }
+]
+
+9. To sort the DOB in ascending and descending order.
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Dob":1,_id:0}).sort({"Personal.Dob":1})
+[
+  { Name: 'Aravind', Personal: { Dob: '1995-03-26' } },
+  { Name: 'Jerena', Personal: { Dob: '1998-11-05' } },
+  { Name: 'Hari', Personal: { Dob: '1999-09-05' } },
+  { Name: 'Bharathi', Personal: { Dob: '2000-06-26' } },
+  { Name: 'Afrith', Personal: { Dob: '2000-11-05' } },
+  { Name: 'Subash', Personal: { Dob: '2001-06-26' } },
+  { Name: 'Elavarasan', Personal: { Dob: '2002-03-26' } },
+  { Name: 'Kamali', Personal: { Dob: '2002-05-05' } },
+  { Name: 'Prasanth', Personal: { Dob: '2002-09-05' } },
+  { Name: 'Sudharsanan', Personal: { Dob: '2002-11-05' } },
+  { Name: 'Mani', Personal: { Dob: '2002-11-05' } },
+  { Name: 'Mithun', Personal: { Dob: '2003-09-05' } },
+  { Name: 'Ashoke', Personal: { Dob: '2003-11-05' } }
+]
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Dob":1,_id:0}).sort({"Personal.Dob":-1})
+[
+  { Name: 'Ashoke', Personal: { Dob: '2003-11-05' } },
+  { Name: 'Mithun', Personal: { Dob: '2003-09-05' } },
+  { Name: 'Sudharsanan', Personal: { Dob: '2002-11-05' } },
+  { Name: 'Mani', Personal: { Dob: '2002-11-05' } },
+  { Name: 'Prasanth', Personal: { Dob: '2002-09-05' } },
+  { Name: 'Kamali', Personal: { Dob: '2002-05-05' } },
+  { Name: 'Elavarasan', Personal: { Dob: '2002-03-26' } },
+  { Name: 'Subash', Personal: { Dob: '2001-06-26' } },
+  { Name: 'Afrith', Personal: { Dob: '2000-11-05' } },
+  { Name: 'Bharathi', Personal: { Dob: '2000-06-26' } },
+  { Name: 'Hari', Personal: { Dob: '1999-09-05' } },
+  { Name: 'Jerena', Personal: { Dob: '1998-11-05' } },
+  { Name: 'Aravind', Personal: { Dob: '1995-03-26' } }
+]
+
+10.To skip first 2 documents and display remaining 3 documents.
+
+kamesh> db.Student_Table.find({},{Name:1,"Personal.Age":1,_id:0}).sort({Name:1}).limit(3).skip(2)
+[
+  { Name: 'Ashoke', Personal: { Age: 21 } },
+  { Name: 'Bharathi', Personal: { Age: 23 } },
+  { Name: 'Elavarasan', Personal: { Age: 22 } }
+]
