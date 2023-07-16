@@ -1,0 +1,571 @@
+1.  Write a MongoDB query to display at least 10 details of the documents of  book_id, Btitle, authors in array and price for all the documents in the collection Bookstore. 
+
+
+test> use moodle;
+switched to db moodle
+moodle> db.createCollection('Bookstore');
+{ ok: 1 }
+moodle> db.Bookstore.insert({'Book_id':1,'Btitle':'kings','authors':'amudhavan','price':12000});
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b275f9bfd3f45a4e8fc089") }
+}
+moodle> db.Bookstore.insert({'Book_id':2,'Btitle':'loves','authors':'sailesh','price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b2761cbfd3f45a4e8fc08a") }
+}
+moodle> db.Bookstore.insert({'Book_id':3,'Btitle':'drama','authors':'mithun','price':10020});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27633bfd3f45a4e8fc08b") }
+}
+moodle> db.Bookstore.insert({'Book_id':4,'Btitle':'anime','authors':'hari','price':1200});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27649bfd3f45a4e8fc08c") }
+}
+moodle> db.Bookstore.insert({'Book_id':5,'Btitle':'queen','authors':'elavarasan','price':1500});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b276bcbfd3f45a4e8fc08d") }
+}
+moodle> db.Bookstore.insert({'Book_id':6,'Btitle':'queen','authors':'prasanth','price':10500});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27714bfd3f45a4e8fc08e") }
+}
+moodle> db.createCollection('Bookstores');
+{ ok: 1 }
+moodle> db.Bookstores.insert({'Book_id':1,'Btitle':'kings','authors':['amudhavan','sailesh'],'price':12000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27775bfd3f45a4e8fc08f") }
+}
+moodle> db.Bookstores.insert({'Book_id':2,'Btitle':'loves','authors':['sailesh','elavarasan'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b277e6bfd3f45a4e8fc090") }
+}
+moodle> db.Bookstores.insert({'Book_id':3,'Btitle':'loves','authors':['munish','billa'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b2781bbfd3f45a4e8fc091") }
+}
+moodle> db.Bookstores.insert({'Book_id':4,'Btitle':'queen','authors':['kamail','prasanth'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27840bfd3f45a4e8fc092") }
+}
+moodle> db.Bookstores.insert({'Book_id':5,'Btitle':'the earth','authors':['kamesh','sudharsan'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27860bfd3f45a4e8fc093") }
+}
+moodle> db.Bookstores.insert({'Book_id':6,'Btitle':'the down','authors':['bharathi','aravind'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b2787bbfd3f45a4e8fc094") }
+}
+moodle> db.Bookstores.insert({'Book_id':7,'Btitle':'the tasks','authors':['subash','ashok'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b27894bfd3f45a4e8fc095") }
+}
+moodle> db.Bookstores.insert({'Book_id':8,'Btitle':'You and i','authors':['afirth','mani'],'price':10000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b278acbfd3f45a4e8fc096") }
+}
+moodle> db.Bookstores.insert({'Book_id':9,'Btitle':'the king','authors':['ajith','vj'],'price':2000});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b278c7bfd3f45a4e8fc097") }
+}
+moodle> db.Bookstores.insert({'Book_id':10,'Btitle':'live let live','authors':['siva','dhanush'],'price':20010});
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("64b278fbbfd3f45a4e8fc098") }
+}
+moodle> db.Bookstores.find();
+[
+  {
+    _id: ObjectId("64b27775bfd3f45a4e8fc08f"),
+    Book_id: 1,
+    Btitle: 'kings',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 12000
+  },
+  {
+    _id: ObjectId("64b277e6bfd3f45a4e8fc090"),
+    Book_id: 2,
+    Btitle: 'loves',
+    authors: [ 'sailesh', 'elavarasan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2781bbfd3f45a4e8fc091"),
+    Book_id: 3,
+    Btitle: 'loves',
+    authors: [ 'munish', 'billa' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27840bfd3f45a4e8fc092"),
+    Book_id: 4,
+    Btitle: 'queen',
+    authors: [ 'kamail', 'prasanth' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27860bfd3f45a4e8fc093"),
+    Book_id: 5,
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2787bbfd3f45a4e8fc094"),
+    Book_id: 6,
+    Btitle: 'the down',
+    authors: [ 'bharathi', 'aravind' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27894bfd3f45a4e8fc095"),
+    Book_id: 7,
+    Btitle: 'the tasks',
+    authors: [ 'subash', 'ashok' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b278acbfd3f45a4e8fc096"),
+    Book_id: 8,
+    Btitle: 'You and i',
+    authors: [ 'afirth', 'mani' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b278c7bfd3f45a4e8fc097"),
+    Book_id: 9,
+    Btitle: 'the king',
+    authors: [ 'ajith', 'vj' ],
+    price: 2000
+  },
+  {
+    _id: ObjectId("64b278fbbfd3f45a4e8fc098"),
+    Book_id: 10,
+    Btitle: 'live let live',
+    authors: [ 'siva', 'dhanush' ],
+    price: 20010
+  }
+]
+
+
+
+
+
+2. Write a MongoDB query to display the fields Btitle,  authors and price but exclude the bookid for all the documents in the collection Bookstore. 
+
+
+moodle> db.Bookstores.find({},{'Btitle':1,'authors':1,'price':1,'_id':0});
+[
+  {
+    Btitle: 'kings',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 12000
+  },
+  {
+    Btitle: 'loves',
+    authors: [ 'sailesh', 'elavarasan' ],
+    price: 10000
+  },
+  { Btitle: 'loves', authors: [ 'munish', 'billa' ], price: 10000 },
+  { Btitle: 'queen', authors: [ 'kamail', 'prasanth' ], price: 10000 },
+  {
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  },
+  {
+    Btitle: 'the down',
+    authors: [ 'bharathi', 'aravind' ],
+    price: 10000
+  },
+  { Btitle: 'the tasks', authors: [ 'subash', 'ashok' ], price: 10000 },
+  { Btitle: 'You and i', authors: [ 'afirth', 'mani' ], price: 10000 },
+  { Btitle: 'the king', authors: [ 'ajith', 'vj' ], price: 2000 },
+  {
+    Btitle: 'live let live',
+    authors: [ 'siva', 'dhanush' ],
+    price: 20010
+  }
+]
+moodle>
+
+
+
+
+3. Write a MongoDB query to display the first 3 books based on similar authors.
+
+
+moodle> db.Bookstores.find({'authors':'amudhavan'}).limit(3);
+[
+  {
+    _id: ObjectId("64b27775bfd3f45a4e8fc08f"),
+    Book_id: 1,
+    Btitle: 'kings',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 12000
+  },
+  {
+    _id: ObjectId("64b27b97bfd3f45a4e8fc099"),
+    Book_id: 11,
+    Btitle: 'the sun',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 2000
+  }
+]
+moodle>
+
+
+
+
+4. Write a MongoDB query to find the book price more than 1500. 
+
+moodle> db.Bookstores.find({'price':{$gt:1500}})
+[
+  {
+    _id: ObjectId("64b27775bfd3f45a4e8fc08f"),
+    Book_id: 1,
+    Btitle: 'kings',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 12000
+  },
+  {
+    _id: ObjectId("64b277e6bfd3f45a4e8fc090"),
+    Book_id: 2,
+    Btitle: 'loves',
+    authors: [ 'sailesh', 'elavarasan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2781bbfd3f45a4e8fc091"),
+    Book_id: 3,
+    Btitle: 'loves',
+    authors: [ 'munish', 'billa' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27840bfd3f45a4e8fc092"),
+    Book_id: 4,
+    Btitle: 'queen',
+    authors: [ 'kamail', 'prasanth' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27860bfd3f45a4e8fc093"),
+    Book_id: 5,
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2787bbfd3f45a4e8fc094"),
+    Book_id: 6,
+    Btitle: 'the down',
+    authors: [ 'bharathi', 'aravind' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27894bfd3f45a4e8fc095"),
+    Book_id: 7,
+    Btitle: 'the tasks',
+    authors: [ 'subash', 'ashok' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b278acbfd3f45a4e8fc096"),
+    Book_id: 8,
+    Btitle: 'You and i',
+    authors: [ 'afirth', 'mani' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b278c7bfd3f45a4e8fc097"),
+    Book_id: 9,
+    Btitle: 'the king',
+    authors: [ 'ajith', 'vj' ],
+    price: 2000
+  },
+  {
+    _id: ObjectId("64b278fbbfd3f45a4e8fc098"),
+    Book_id: 10,
+    Btitle: 'live let live',
+    authors: [ 'siva', 'dhanush' ],
+    price: 20010
+  },
+  {
+    _id: ObjectId("64b27b97bfd3f45a4e8fc099"),
+    Book_id: 11,
+    Btitle: 'the sun',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 2000
+  },
+  {
+    _id: ObjectId("64b27ba4bfd3f45a4e8fc09a"),
+    Book_id: 12,
+    Btitle: 'the tasks',
+    authors: [ 'subash', 'ashok' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27bb2bfd3f45a4e8fc09b"),
+    Book_id: 13,
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  }
+]
+moodle>
+
+
+
+5. Write a MongoDB query to find the book title who's price is  more than 800 but less than 2000.
+
+
+moodle> db.Bookstores.find({'price':{$gt:800, $lt:2000}},{'_id':0, 'Btitle':1})
+
+Note : There is no books in this price. 
+
+
+
+
+6. Write a MongoDB query to arrange the book name of the bookstore in ascending order along with all the columns. 
+
+moodle> db.Bookstores.find().sort({'Btitle':1})
+[
+  {
+    _id: ObjectId("64b278acbfd3f45a4e8fc096"),
+    Book_id: 8,
+    Btitle: 'You and i',
+    authors: [ 'afirth', 'mani' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27775bfd3f45a4e8fc08f"),
+    Book_id: 1,
+    Btitle: 'kings',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 12000
+  },
+  {
+    _id: ObjectId("64b278fbbfd3f45a4e8fc098"),
+    Book_id: 10,
+    Btitle: 'live let live',
+    authors: [ 'siva', 'dhanush' ],
+    price: 20010
+  },
+  {
+    _id: ObjectId("64b277e6bfd3f45a4e8fc090"),
+    Book_id: 2,
+    Btitle: 'loves',
+    authors: [ 'sailesh', 'elavarasan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2781bbfd3f45a4e8fc091"),
+    Book_id: 3,
+    Btitle: 'loves',
+    authors: [ 'munish', 'billa' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27840bfd3f45a4e8fc092"),
+    Book_id: 4,
+    Btitle: 'queen',
+    authors: [ 'kamail', 'prasanth' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b2787bbfd3f45a4e8fc094"),
+    Book_id: 6,
+    Btitle: 'the down',
+    authors: [ 'bharathi', 'aravind' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27860bfd3f45a4e8fc093"),
+    Book_id: 5,
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27bb2bfd3f45a4e8fc09b"),
+    Book_id: 13,
+    Btitle: 'the earth',
+    authors: [ 'kamesh', 'sudharsan' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b278c7bfd3f45a4e8fc097"),
+    Book_id: 9,
+    Btitle: 'the king',
+    authors: [ 'ajith', 'vj' ],
+    price: 2000
+  },
+  {
+    _id: ObjectId("64b27b97bfd3f45a4e8fc099"),
+    Book_id: 11,
+    Btitle: 'the sun',
+    authors: [ 'amudhavan', 'sailesh' ],
+    price: 2000
+  },
+  {
+    _id: ObjectId("64b27894bfd3f45a4e8fc095"),
+    Book_id: 7,
+    Btitle: 'the tasks',
+    authors: [ 'subash', 'ashok' ],
+    price: 10000
+  },
+  {
+    _id: ObjectId("64b27ba4bfd3f45a4e8fc09a"),
+    Book_id: 12,
+    Btitle: 'the tasks',
+    authors: [ 'subash', 'ashok' ],
+    price: 10000
+  }
+]
+
+
+
+
+7.Write a MongoDB query to arrange the book name of the bookstore in ascending order along with all the columns. 
+
+
+moodle> db.Bookstores.find().sort({'Btitle':1})
+
+
+
+8. Write a MongoDB query to know whether the author in the authors list.
+
+moodle> db.Bookstores.find({},{'authors':1, '_id':0})
+[
+  { authors: [ 'amudhavan', 'sailesh' ] },
+  { authors: [ 'sailesh', 'elavarasan' ] },
+  { authors: [ 'munish', 'billa' ] },
+  { authors: [ 'kamail', 'prasanth' ] },
+  { authors: [ 'kamesh', 'sudharsan' ] },
+  { authors: [ 'bharathi', 'aravind' ] },
+  { authors: [ 'subash', 'ashok' ] },
+  { authors: [ 'afirth', 'mani' ] },
+  { authors: [ 'ajith', 'vj' ] },
+  { authors: [ 'siva', 'dhanush' ] },
+  { authors: [ 'amudhavan', 'sailesh' ] },
+  { authors: [ 'subash', 'ashok' ] },
+  { authors: [ 'kamesh', 'sudharsan' ] }
+]
+moodle>
+
+
+
+9.Write a MongoDB query to update & increase the book price Rs.500 in all book name as "MongoDB Practice".
+
+
+moodle> db.Bookstores.updateMany({'Btitle':"MongoDB Practice"},{$inc:{price:500}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+moodle>
+
+
+
+10. Write a MongoDB query to use Update modifiers ($set, $push,  $pull, $upsert) in bookstore.
+
+
+moodle> db.bookstores.update({btitle:'MongoDB Practice'},{$set:{Price:500}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+moodle> db.bookstores.find({btitle:'MongoDB Practice'});
+[
+  {
+    _id: ObjectId("64b2799a9d000a4fe70a1fa5"),
+    book_id: 107,
+    btitle: 'MongoDB Practice',
+    Authors: [ 'Edward', 'Louis Bromfield' ],
+    Price: 500
+  }
+
+moodle> db.bookstores.update({btitle:'MongoDB Practice'},{$push:{Authors:'EDITH WHARTON'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+moodle> db.bookstores.find({btitle:'MongoDB Practice'});
+[
+  {
+    _id: ObjectId("64b2799a9d000a4fe70a1fa5"),
+    book_id: 107,
+    btitle: 'MongoDB Practice',
+    Authors: [ 'Edward', 'Louis Bromfield', 'EDITH WHARTON' ],
+    Price: 500
+  }
+]
+
+moodle> db.bookstores.update({btitle:'MongoDB Practice'},{$pull:{Authors:'Louis Bromfield'}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+moodle> db.bookstores.find({btitle:'MongoDB Practice'});
+[
+  {
+    _id: ObjectId("64b2799a9d000a4fe70a1fa5"),
+    book_id: 107,
+    btitle: 'MongoDB Practice',
+    Authors: [ 'Edward', 'EDITH WHARTON' ],
+    Price: 500
+  }
+]
+moodle> db.bookstores.updateOne({btitle:'MySql'},{$set:{book_id:15,btitle:'MySql',Authors:['Michael Widenius','Luke Welling'],Price:900}},{upsert:true});
+{
+  acknowledged: true,
+  insertedId: ObjectId("64b28346b08fc1249d9fe224"),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+moodle> db.bookstores.find({btitle:'MySql'});
+[
+  {
+    _id: ObjectId("64b28346b08fc1249d9fe224"),
+    btitle: 'MySql',
+    Authors: [ 'Michael Widenius', 'Luke Welling' ],
+    Price: 900,
+    book_id: 12
+  }
+]
+
+
+
+
